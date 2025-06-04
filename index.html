@@ -68,6 +68,13 @@
             background-position: right center;
             transform: scale(1.05);
         }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;     /* Firefox */
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;             /* Chrome, Safari, Opera */
+        }
     </style>
 </head>
 
@@ -176,18 +183,44 @@
         </header>
         <!-- Main Content -->
         <main class="flex-grow">
-            <!-- Hero Section -->
-            <section class="relative flex items-center justify-center min-h-[60vh] bg-gradient-to-br from-cyan-100 via-white to-purple-100 overflow-hidden">
-                <div class="absolute inset-0 bg-[url('images/shoe4.png')] bg-no-repeat bg-right-bottom bg-contain opacity-10 pointer-events-none"></div>
-                <div class="container mx-auto px-2 sm:px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between py-10 sm:py-20 gap-8">
-                    <div class="flex flex-col items-start w-full md:w-1/2 z-10 animate-fade-in">
-                        <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-2 sm:mb-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-transparent bg-clip-text drop-shadow-lg">Welcome to ShoesFind</h1>
-                        <p class="text-lg sm:text-2xl text-gray-600 mb-4 sm:mb-8">Find Your Best Shoes Here</p>
-                        <a href="#products" class="animated-gradient-btn text-white font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-xl shadow-lg text-base sm:text-xl uppercase">Shop Now</a>
+            <!-- Hero Section Carousel -->
+            <section class="relative min-h-[60vh] bg-gradient-to-br from-cyan-100 via-white to-purple-100 overflow-hidden">
+                <div class="w-full overflow-x-auto flex snap-x snap-mandatory scroll-smooth no-scrollbar" id="hero-carousel">
+                    <!-- Slide 1 -->
+                    <div class="flex-shrink-0 w-full flex items-center justify-center snap-center" style="min-width:100vw;">
+                        <div class="relative flex flex-col md:flex-row items-center justify-between py-10 sm:py-20 gap-8 w-full container mx-auto px-2 sm:px-4 lg:px-8">
+                            <div class="flex flex-col items-start w-full md:w-1/2 z-10 animate-fade-in">
+                                <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-2 sm:mb-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-transparent bg-clip-text drop-shadow-lg">Welcome to ShoesFind</h1>
+                                <p class="text-lg sm:text-2xl text-gray-600 mb-4 sm:mb-8">Find Your Best Shoes Here</p>
+                                <a href="#products" class="animated-gradient-btn text-white font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-xl shadow-lg text-base sm:text-xl uppercase">Shop Now</a>
+                            </div>
+                            <div class="flex items-center justify-end w-full md:w-1/2 z-10">
+                                <div>
+                                    <img src="images/shoe4.png" alt="Featured Shoe" class="w-[420px] sm:w-[500px] h-auto object-contain drop-shadow-2xl animate-fade-in z-10 rotate-[-20deg]" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center justify-end w-full md:w-1/2 mt-8 md:mt-0 z-10">
-                        <img src="images/shoe4.png" alt="Featured Shoe" class="w-full max-w-[300px] sm:max-w-[500px] h-auto object-contain drop-shadow-2xl animate-fade-in" loading="lazy">
+                    <!-- Slide 2 -->
+                    <div class="flex-shrink-0 w-full flex items-center justify-center snap-center" style="min-width:100vw;">
+                        <div class="relative flex flex-col md:flex-row items-center justify-between py-10 sm:py-20 gap-8 w-full container mx-auto px-2 sm:px-4 lg:px-8">
+                            <div class="flex flex-col items-start w-full md:w-1/2 z-10 animate-fade-in">
+                                <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-2 sm:mb-4 bg-gradient-to-r from-pink-500 to-yellow-500 text-transparent bg-clip-text drop-shadow-lg">Step Up Your Game</h1>
+                                <p class="text-lg sm:text-2xl text-gray-600 mb-4 sm:mb-8">Discover the latest arrivals and exclusive deals.</p>
+                                <a href="#products" class="animated-gradient-btn1 text-white font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-xl shadow-lg text-base sm:text-xl uppercase">Explore</a>
+                            </div>
+                            <div class="flex items-center justify-end w-full md:w-1/2 z-10">
+                                <div>
+                                    <img src="images/shoes11-Photoroom.png" alt="New Arrival Shoe" class="w-[420px] sm:w-[480px] h-auto object-contain drop-shadow-2xl animate-fade-in z-10 rotate-[30deg]" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <!-- Carousel indicators (optional) -->
+                <div class="absolute left-1/2 bottom-6 transform -translate-x-1/2 flex gap-2 z-20">
+                    <button class="w-3 h-3 rounded-full bg-cyan-400 opacity-80" id="hero-dot-0"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300 opacity-80" id="hero-dot-1"></button>
                 </div>
             </section>
             <!-- Products Section -->
@@ -322,6 +355,19 @@
                 setTimeout(() => loader.style.display = 'none', 700);
             }
         });
+        // Auto-scroll carousel
+        const carousel = document.getElementById('hero-carousel');
+        const slides = carousel.children.length;
+        let current = 0;
+        setInterval(() => {
+            current = (current + 1) % slides;
+            carousel.scrollTo({ left: current * window.innerWidth, behavior: 'smooth' });
+            // Update indicators
+            for(let i=0;i<slides;i++) {
+                document.getElementById('hero-dot-'+i).classList.toggle('bg-cyan-400', i===current);
+                document.getElementById('hero-dot-'+i).classList.toggle('bg-gray-300', i!==current);
+            }
+        }, 4000);
     </script>
 </body>
 
