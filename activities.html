@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities</title>
+    <link rel="shortcut icon" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .fade-in {
+        animation: fadeIn 1s ease-in;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .mobile-menu-enter {
+        animation: mobileMenuIn 0.4s cubic-bezier(0.4,0,0.2,1) forwards;
+      }
+      @keyframes mobileMenuIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+</head>
+<body class="w-full h-full font-['Roboto']">
+    <div class="w-full h-full flex flex-col">
+        <!-- Header -->
+        <header class="w-full bg-white shadow-lg border-b border-gray-200 fade-in z-50 sticky top-0">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <!-- Logo -->
+                    <div class="branding flex items-center space-x-2">
+                        <img src="images/logo.png" alt="ShoesFind Logo" class="h-10 w-10 rounded-full shadow-md">
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">ShoesFind</h1>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex items-center space-x-4 lg:space-x-8">
+                        <a href="index.html" class="font-medium text-[15px] lg:text-[17px] no-underline text-black transition-all duration-300 px-3 py-2 rounded hover:text-white hover:bg-black">Home</a>
+                        <a href="categories.html" class="font-medium text-[15px] lg:text-[17px] no-underline text-black transition-all duration-300 px-3 py-2 rounded hover:text-white hover:bg-black">Categories</a>
+                        <a href="products.html" class="font-medium text-[15px] lg:text-[17px] no-underline text-black transition-all duration-300 px-3 py-2 rounded hover:text-white hover:bg-black">Products</a>
+                        <a href="about.html" class="font-medium text-[15px] lg:text-[17px] no-underline text-black transition-all duration-300 px-3 py-2 rounded hover:text-white hover:bg-black">About</a>
+                        <a href="contact.html" class="font-medium text-[15px] lg:text-[17px] no-underline text-black transition-all duration-300 px-3 py-2 rounded hover:text-white hover:bg-black">Contact</a>
+                    </nav>
+
+                    <!-- Desktop Auth Buttons -->
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="login.html" class="bg-black text-base lg:text-lg text-white no-underline transition-all duration-300 px-4 py-2 rounded hover:text-white hover:bg-gray-700">Login</a>
+                        <a href="#" class=" bg-black text-base lg:text-lg text-white no-underline transition-all duration-300 px-4 py-2 rounded hover:text-white hover:bg-gray-700">Sign up</a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden text-2xl transition-transform duration-300 hover:scale-110">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div id="mobileMenu" class="md:hidden hidden py-4">
+                    <nav class="flex flex-col space-y-3 animate-fade-in">
+                        <a href="index.html" class="font-medium text-base no-underline text-black transition-all duration-300 px-3 py-2 rounded hover:text-white hover:bg-black">Home</a>
+                        <a href="categories.html" class="font-medium text-base no-underline text-black transition-all duration-300 px-3 py-2 rounded hover:text-white hover:bg-black">Categories</a>
+                        <a href="product.html" class="font-medium text-base no-underline text-black transition-all duration-300 px-3 py-2 rounded hover:text-white hover:bg-black">Products</a>
+                        <a href="about.html" class="font-medium text-base no-underline text-black transition-all duration-300 px-3 py-2 rounded hover:text-white hover:bg-black">About</a>
+                        <a href="contact.html" class="font-medium text-base no-underline text-black transition-all duration-300 px-3 py-2 rounded hover:text-white hover:bg-black">Contact</a>
+                        <div class="flex space-x-4 pt-2">
+                            <a href="login.html" class="font-medium text-base text-black no-underline transition-all duration-300 px-4 py-2 rounded hover:text-white hover:bg-gray-700">Login</a>
+                            <a href="signup.html" class="font-medium text-base text-black no-underline transition-all duration-300 px-4 py-2 rounded hover:text-white hover:bg-gray-700">Sign up</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <script>
+        // Mobile menu toggle with animation
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuButton.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('mobile-menu-enter');
+                setTimeout(() => mobileMenu.classList.remove('mobile-menu-enter'), 400);
+            } else {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+        </script>
+    </div>
+</body>
+</html>
